@@ -6,7 +6,6 @@ const bcrypt = require('bcryptjs');
 const User = mongoose.model('users');
 
 module.exports = function (passport) {
-    console.log('qwe passport:')
     passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
         User.findOne({
             email: email
