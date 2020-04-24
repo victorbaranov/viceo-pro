@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
+const connectDB = require('./config/db');
 
 const methodOverride = require('method-override');
 const session = require('express-session');
@@ -14,6 +16,11 @@ const expressHandlebars = require('express-handlebars');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 
 const bodyParser = require('body-parser');
+
+
+dotenv.config({path: './config/config.env'});
+
+connectDB();
 
 const app = express();
 
@@ -29,11 +36,11 @@ const db = require('./config/database')
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(db.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log("MongoDB Connected..."))
-    .catch((err) => console.log(err));
+// mongoose.connect(db. , {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// }).then(() => console.log("MongoDB Connected..."))
+//     .catch((err) => console.log(err));
 
 // app.engine('handlebars', expressHandlebars({
 app.engine('handlebars', exphbs({
