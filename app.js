@@ -33,15 +33,15 @@ const users = require('./routes/users');
 // Passport Config
 require('./config/passport')(passport);
 
-const db = require('./config/database')
+const db = require('./config/db')
 
 mongoose.Promise = global.Promise;
 
-// mongoose.connect(db. , {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => console.log("MongoDB Connected..."))
-//     .catch((err) => console.log(err));
+mongoose.connect(db.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log("MongoDB Connected..."))
+    .catch((err) => console.log(err));
 
 // app.engine('handlebars', expressHandlebars({
 app.engine('handlebars', exphbs({
@@ -54,7 +54,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-// app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(methodOverride('_method'));
 
@@ -77,16 +77,16 @@ app.use((req, res, next) => {
     next();
 });
 
-if (process.env.NODE_ENV === 'production') {
-    // app.use(express.static('client/build'));
-    app.use(express.static(path.join(__dirname, 'public')))
-    // app.use(express.static('public'))
-    // app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'public')));
-}
+// if (process.env.NODE_ENV === 'production') {
+//     // app.use(express.static('client/build'));
+//     app.use(express.static(path.join(__dirname, 'public')))
+//     // app.use(express.static('public'))
+//     // app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'public')));
+// }
 
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
+// if (process.env.NODE_ENV === 'development') {
+//     app.use(morgan('dev'));
+// }
 
 app.get('/', (req, res) => {
     const title = 'Welome from App';
