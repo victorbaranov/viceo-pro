@@ -4,7 +4,10 @@
   "description": "App to create video ideas",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "victorbaranov",
   "license": "ISC",
@@ -24,6 +27,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "morgan": "^1.10.0"
   }
 }
