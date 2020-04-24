@@ -33,15 +33,15 @@ const users = require('./routes/users');
 // Passport Config
 require('./config/passport')(passport);
 
-const db = require('./config/db')
+// const db = require('./config/db')
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(db.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log("MongoDB Connected..."))
-    .catch((err) => console.log(err));
+// mongoose.connect(db.mongoURI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// }).then(() => console.log("MongoDB Connected..."))
+//     .catch((err) => console.log(err));
 
 // app.engine('handlebars', expressHandlebars({
 app.engine('handlebars', exphbs({
